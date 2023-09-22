@@ -1,10 +1,24 @@
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Policy from "./pages/Policy";
+import Pagenotfound from "./pages/Pagenotfound";
+import Register from "./pages/Auth/Register";
 
 function App() {
   return (
-    <div className="App">
-     <h1>welcome to ecommerce</h1>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="*" element={<Pagenotfound />} />
+      </Routes>
+    </>
   );
 }
 
