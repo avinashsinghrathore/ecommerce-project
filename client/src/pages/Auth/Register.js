@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import './Register.css'
+import "./Register.css";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -11,7 +11,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [phone, setphone] = useState("");
   const [address, setAddress] = useState("");
-  const navigate = useNavigate()
+  const [answer, setAnswer] = useState("");
+  const navigate = useNavigate();
 
   // form function
   const handleSubmit = async (e) => {
@@ -19,13 +20,13 @@ const Register = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/auth/register`,
-        { name, email, password, phone, address }
+        { name, email, password, phone, address, answer }
       );
-      if(res.data.success) {
-        toast.success(res.data.message)
-        navigate("/login")
+      if (res.data.success) {
+        toast.success(res.data.message);
+        navigate("/login");
       } else {
-        toast.error(res.data.message)
+        toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
@@ -36,8 +37,8 @@ const Register = () => {
   return (
     <Layout>
       <div className="form-container">
-        <h1>Register page</h1>
         <form onSubmit={handleSubmit}>
+          <h3>Register page</h3>
           <div className="mb-3">
             <input
               type="text"
@@ -93,6 +94,18 @@ const Register = () => {
               className="form-control"
               id="exampleInputAddress"
               placeholder="Address"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="form-control"
+              id="exampleInputAddress"
+              placeholder="Your favourite sport"
               required
             />
           </div>
